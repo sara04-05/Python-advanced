@@ -28,7 +28,6 @@ print(shopping_list)
 shopping_list[0] = "cereal"
 print(shopping_list)
 
-
 favorite_colors = ['green' , 'yellow' , 'brown' , 'black' , 'pink']
 
 fourth_color = favorite_colors[3]
