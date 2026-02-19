@@ -1,9 +1,17 @@
 grades = {
-    ("Festa" , "Biology") : 5,
     ("Melina", "Math"): 2,
+    ("Festa" , "Biology") : 5,
     ("Dion" , "Physics") :3.5,
     ("Reina", "English") : 4
 }
 
 melina_math = grades[("Melina" , "Math")]
 print("Melina's grade in math is :",melina_math)
+
+grades[("Dion" , "Physics")] = 3
+print(grades)
+
+keys = list(grades.keys())
+
+student, subject = keys[0]
+print(student, "'s grade in" , subject , "is " , melina_math)
