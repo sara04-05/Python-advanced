@@ -1,7 +1,3 @@
-from PIL.ImageChops import difference
-from pandas.core.computation.expr import intersection
-from streamlit import columns
-
 my_set = {1, 2, 3, 4, 4, 5, 5, 5, 6, 7}
 print(my_set)
 
