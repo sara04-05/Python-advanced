@@ -1,12 +1,14 @@
+
+
 class Animal:
     def __init__(self,name):
         self.name=name
 
     def sound(self):
-        print("some generic animal sound")
+        print("Some generic animal sound")
 
     def description(self):
-        print(f"This is an animal name {self.name}")
+        print(f"This is an animal name{self.name}")
 
 class Dog(Animal):
     def __init__(self,name,breed):
@@ -21,28 +23,27 @@ class Dog(Animal):
 
         print(f"Breed: {self.breed}")
 
-
-class cat(Animal):
-    def __init__(self, name, color):
+class Cat(Animal):
+    def __init__(self,name,color):
         super().__init__(name)
         self.color = color
 
     def sound(self):
-        print("meow!Meow!")
+        print("Meow!,Meow!")
 
     def description(self):
         super().description()
-        print(f"color: {self.color}")
+        print(f"Color: {self.color}")
 
-animal = Animal("generic animal")
+animal = Animal(" Generic Animal")
 
 animal.sound()
 animal.description()
 
-dog = Dog("Bella", "Rottweiler")
+dog = Dog("  Bella", "Golden Retriver")
 dog.sound()
 dog.description()
 
-cat = Cat("Nimo", "white")
+cat = Cat(" Nimo", "White")
 cat.sound()
 cat.description()
