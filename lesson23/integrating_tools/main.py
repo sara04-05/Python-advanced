@@ -19,6 +19,6 @@ def get_projects():
         title="Sample Project",
         description= "This is a sample project",
         languages=["Python", "Javascript"],
-        lead_developer=Developer(name="Dion Kabashi", experience=5)
+        lead_developer=Developer(name="Sara Simnica", experience=5)
     )
     return {"projects": [sample_project]}
