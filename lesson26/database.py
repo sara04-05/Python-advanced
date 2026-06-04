@@ -1,0 +1,79 @@
+import sqlite3
+from models import Recipe, Category
+
+def create_connection():
+    connection = sqlite3.connect("recipe.db")
+    connection.row_factory = sqlite3.Row
+    return connection
+
+def create_table():
+    connection = create_connection()
+    cursor = connection.cursor()
+    cursor.execute('''
+        create table if not exists categories(
+            id integer primary key autoincrement,
+            name text not null,
+            description text not null,
+            ingredients integer
+        )
+    ''')
+    connection.commit()
+    connection.close()
+
+create_table()
+
+def create_category(category: CategoryCreate) -> int:
+    connection = create_connection()
+    cursor = connection.cursor()
+
+    cursor.execute(
+        "INSERT INTO categories (name, description, ingredients) VALUES (?, ?, ?)",
+        (category.name, category.description, category.ingredients)
+    )
+
+    connection.commit()
+    category_id = cursor.lastrowid
+    connection.close()
+
+    return category_id
+
+def read_movie():
+    connection = create_connection()
+    cursor = connection.cursor()
+    cursor.execute("select * from movies")
+    rows = cursor.fetchall()
+    connection.close()
+    movies = [Movie(id=row[0], title=row[1], director=row[2]) for row in rows]
+    return movies
+
+def read_movie(movie_id: int):
+    connection = create_connection()
+    cursor = connection.cursor()
+    cursor.execute("select * from movies where id = ?", (movie_id, ))
+    row = cursor.fetchone()
+    connection.close()
+    if row is None:
+        return None
+    return Movie(id=row["id"], title=row["title"], director=row["director"])
+
+
+def update_movie(movie_id: int, movie: MovieCreate) -> bool:
+
+    connection = create_connection()
+    cursor = connection.cursor()
+    cursor.execute("UPDATE movies SET title = ?, director = ? WHERE id = ?", (movie.title, movie.director, movie_id))
+    connection.commit()
+    updated = cursor.rowcount
+    connection.close()
+    return updated > 0
+
+
+def delete_movie(movie_id: int) -> bool:
+
+    connection = create_connection()
+    cursor = connection.cursor()
+    cursor.execute("DELETE FROM movies WHERE id = ?", (movie_id,))
+    connection.commit()
+    deleted = cursor.rowcount
+    connection.close()
+    return deleted > 0
