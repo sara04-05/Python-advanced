@@ -1,10 +1,5 @@
-from http.client import HTTPException
-
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from typing import List
-
-from streamlit import status
-
 import database
 import models
 from models import Movie, MovieCreate
@@ -31,7 +26,7 @@ def read_movie(movie_id: int):
         raise HTTPException(status_code=404, detail = " Movie not found ")
     return movie
 
-@app.put("/movies{movie_id}/", response_model=Movie)
+@app.put("/movies/{movie_id}", response_model=Movie)
 def update_movie(movie_id: int, movie:MovieCreate):
     updated = database.updated_movie(movie_id, movie)
     if not updated:
